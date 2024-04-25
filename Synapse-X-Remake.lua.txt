@@ -2814,7 +2814,7 @@ local enumLibraryTable = language.libraries.Enum
 
 for _, enum in ipairs(Enum:GetEnums()) do
 	--TODO: Remove tostring from here once there is a better way to get the name of an Enum
-	enumLibraryTable[tostring(enum)] = "Enum"
+	enumLibraryTable[(enum)] = "Enum"
 end
 
 return language
@@ -3126,8 +3126,8 @@ local function C_51()
 		module:AddScriptTabSave(script.Parent.scriptname.Text..".lua", module:GetActiveTextbox().Frame.Textbox.Text)
 		script.Parent.Visible = false
 		script.Parent.scriptname.Text = ''
-		makefolder("zxc")
-		writefile("zxc/"..script.Parent.scriptname.Text..".lua", module:GetActiveTextbox().Frame.Textbox.Text)
+		makefolder("SynapseSavedScripts")
+		writefile("SynapseSavedScripts/"..script.Parent.scriptname.Text..".lua", module:GetActiveTextbox().Frame.Textbox.Text)
 	end)
 
 	script.Parent.Close.MouseButton1Up:Connect(function()
@@ -3301,11 +3301,11 @@ local function C_84()
 	local script = G2L["84"];
 	local module = require(script.Parent.Module)
     
-	for index, value in pairs(listfiles("zxc")) do
+	for index, value in pairs(listfiles("SynapseSavedScripts")) do
     	print(value)
 		if isfile(value) then
 			task.wait(0.05)
-            local editedString = string.gsub(value)
+            local editedString = string.gsub(value, [[SynapseSavedScripts\]], "")
 			module:AddScriptTabSave(editedString, readfile(value))
 		end
 	end
